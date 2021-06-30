@@ -69,9 +69,7 @@ public class ReservaPassagem {
     public Reserva[] mostrarReservas(long cpfCliente) {
         for (int i = 0; i < listaDeClientes.length; i++) {
             if (listaDeClientes[i].getCpf() == cpfCliente) {
-                for (int j = 0; j < listaDeClientes[i].getReservas().length; j++) {
-                    return listaDeClientes[j].getReservas();
-                }
+                return listaDeClientes[i].getReservas();
             }
 
         }

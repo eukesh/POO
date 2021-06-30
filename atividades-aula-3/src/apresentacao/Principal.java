@@ -5,12 +5,12 @@ import negocio.ReservaPassagem;
 import java.util.*;
 
 public class Principal {
-    
+
     private static Scanner scan = new Scanner(System.in);
     private static Scanner scanString = new Scanner(System.in);
     private static ReservaPassagem sistema = new ReservaPassagem();
 
-    public static void exibeMenu(){
+    public static void exibeMenu() {
         System.out.println("Escolha uma opção:");
         System.out.println("0 - Encerrar");
         System.out.println("1 - Realizar Reserva");
@@ -21,13 +21,13 @@ public class Principal {
 
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int option = -1;
 
-        while(option != 0){
+        while (option != 0) {
             exibeMenu();
             option = scan.nextInt();
-            switch(option){
+            switch (option) {
                 case 0:
                     System.out.println("Até logo!");
                     break;
@@ -38,7 +38,7 @@ public class Principal {
                 case 2:
                     System.out.println("Cadastrar Cliente");
                     cadastrarCliente();
-                    break;  
+                    break;
                 case 3:
                     System.out.println("Cadastrar Cidade");
                     cadastraCidades();
@@ -50,14 +50,14 @@ public class Principal {
                 case 5:
                     System.out.println("Mostrar  Clientes");
                     mostrarClientes();
-                    break;  
+                    break;
                 default:
-                System.out.println("Opção inválida");
+                    System.out.println("Opção inválida");
             }
         }
     }
 
-    public static void cadastraCidades(){
+    public static void cadastraCidades() {
         Cidade newCidade = new Cidade();
         System.out.println("Digite o nome: ");
         newCidade.setNome(scanString.nextLine());
@@ -67,27 +67,27 @@ public class Principal {
         sistema.cadastrarCidade(newCidade);
     }
 
-    public static void mostrarReserva(){
+    public static void mostrarReserva() {
         System.out.println("Qual o CPF do Cliente?");
         long cpfCliente = scan.nextLong();
-        for(int i=0; i<sistema.mostrarReservas(cpfCliente).length; i++){
+        for (int i = 0; i < sistema.mostrarReservas(cpfCliente).length; i++) {
 
             System.out.println(sistema.mostrarReservas(cpfCliente)[i]);
         }
     }
 
-    public static void mostrarCidades(){
-        for(int i = 0; i < sistema.getQuantCidades();i++){
-            System.out.println("Cidade "+(i+1)+": ");
-            System.out.println(sistema.mostrarCidades()[i]+"");
+    public static void mostrarCidades() {
+        for (int i = 0; i < sistema.getQuantCidades(); i++) {
+            System.out.println("Cidade " + (i + 1) + ": ");
+            System.out.println(sistema.mostrarCidades()[i] + "");
         }
     }
-    
-    public static void realizarReserva(){
+
+    public static void realizarReserva() {
         int key4;
         mostrarClientes();
         System.out.println("Qual cliente?");
-        int key  = scan.nextInt();
+        int key = scan.nextInt();
 
         Reserva newReserva = new Reserva();
         Reserva newReserva2 = new Reserva();
@@ -107,15 +107,15 @@ public class Principal {
         mostrarCidades();
         System.out.println("Qual Cidade Origem?");
         int key3 = scan.nextInt();
-        newReserva.setOrigem(sistema.mostrarCidades()[key3-1]);
+        newReserva.setOrigem(sistema.mostrarCidades()[key3 - 1]);
         System.out.println("Qual Cidade Destino?");
         key3 = scan.nextInt();
-        newReserva.setDestino(sistema.mostrarCidades()[key3-1]);
+        newReserva.setDestino(sistema.mostrarCidades()[key3 - 1]);
 
         System.out.println("Deseja efetuar uma reserva de volta?\n1 - Sim\n2 - Não");
         int key2 = scan.nextInt();
-        if(key2 == 1){
-            
+        if (key2 == 1) {
+
             System.out.println("Numero da Reserva: ");
             newReserva2.setNumReserva(scan.nextInt());
             System.out.println("Data do Voo: ");
@@ -128,30 +128,30 @@ public class Principal {
             newReserva2.setClasseVoo(scan.nextLine());
             System.out.println("Poltrona: ");
             newReserva2.setPoltrona(scan.nextInt());
-    
+
             mostrarCidades();
             System.out.println("Qual Cidade Origem?");
             key4 = scan.nextInt();
-            newReserva2.setOrigem(sistema.mostrarCidades()[key4-1]);
+            newReserva2.setOrigem(sistema.mostrarCidades()[key4 - 1]);
             System.out.println("Qual Cidade Destino?");
             key4 = scan.nextInt();
-            newReserva2.setDestino(sistema.mostrarCidades()[key4-1]);
+            newReserva2.setDestino(sistema.mostrarCidades()[key4 - 1]);
 
         }
 
-        sistema.reservaIda(sistema.mostrarClientes()[key-1],newReserva);
-        sistema.reservarVolta(sistema.mostrarClientes()[key-1],newReserva,newReserva2);
+        sistema.reservaIda(sistema.mostrarClientes()[key - 1], newReserva);
+        sistema.reservarVolta(sistema.mostrarClientes()[key - 1], newReserva, newReserva2);
 
     }
 
-    public static void mostrarClientes(){
-        for(int i = 0; i < sistema.getQuantClientes();i++){
-            System.out.println("Cliente "+(i+1)+": ");
-            System.out.println(sistema.mostrarClientes()[i]+"\n");
+    public static void mostrarClientes() {
+        for (int i = 0; i < sistema.getQuantClientes(); i++) {
+            System.out.println("Cliente " + (i + 1) + ": ");
+            System.out.println(sistema.mostrarClientes()[i] + "\n");
         }
     }
 
-    public static Cliente newCliente(){
+    public static Cliente newCliente() {
         Cliente novoCliente = new Cliente();
         System.out.println("Digite o CPF:");
         novoCliente.setCpf(scan.nextLong());
@@ -165,7 +165,7 @@ public class Principal {
         return novoCliente;
     }
 
-    public static void cadastrarCliente(){
-        sistema.cadastrarCliente(newCliente());        
+    public static void cadastrarCliente() {
+        sistema.cadastrarCliente(newCliente());
     }
 }
