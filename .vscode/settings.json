@@ -1,8 +1,0 @@
-{
-    "java.dependency.syncWithFolderExplorer": true,
-    "java.dependency.packagePresentation": "flat",
-    "java.project.sourcePaths": [
-        "atividades-aula-1/src",
-        "teste/src"
-    ]
-}

@@ -27,6 +27,16 @@ public class Main {
 
     }
 
+    public static void initMap() {
+        String ageIndex[] = { "crianças", "adolescentes", "jovens", "adultos", "idosos" };
+
+        for (int i = 0; i < ageIndex.length; i++) {
+            List<Pessoa> pessoas = new ArrayList<Pessoa>();
+            lista.put(ageIndex[i], pessoas);
+        }
+
+    }
+
     public static void createPessoaFile(Scanner sc) {
 
         do {
@@ -87,16 +97,6 @@ public class Main {
         } else if (index >= 60) {
             List<Pessoa> pessoa = lista.get("idosos");
             pessoa.add(p);
-        }
-
-    }
-
-    public static void initMap() {
-        String ageIndex[] = { "crianças", "adolescentes", "jovens", "adultos", "idosos" };
-
-        for (int i = 0; i < ageIndex.length; i++) {
-            List<Pessoa> pessoas = new ArrayList<Pessoa>();
-            lista.put(ageIndex[i], pessoas);
         }
 
     }
