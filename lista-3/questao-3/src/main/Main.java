@@ -17,11 +17,11 @@ public class Main {
             for (int j = 0; j < 5; j++) {
                 System.out.printf("Posição: [%d][%d]: ", i, j);
                 matriz.set(s.nextInt(), i, j);
-            }
         }
+    }
 
         System.out.println("Menor elemento: " + menorElemento());
-    }
+}
 
     private static int menorElemento() {
         List<Integer> list = new ArrayList<Integer>();

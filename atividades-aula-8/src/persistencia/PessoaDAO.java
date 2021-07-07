@@ -13,7 +13,7 @@ public class PessoaDAO {
     public void delete(Pessoa pessoa) {
         List<Pessoa> pessoas = arquivoPessoaDAO.lePessoasArquivo();
         pessoas.remove(pessoa);
-        arquivoPessoaDAO.salvaPessoaArquivo(pessoa);
+        arquivoPessoaDAO.salvaPessoasArquivo(pessoas);
     }
 
     public List<Pessoa> getAll() {
