@@ -84,8 +84,9 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Qual a letra que deseja buscar: ");
-                    char letra = scan.nextLine().charAt(0);
+                    char letra = scanText.nextLine().charAt(0);
                     exibirContatos(letra);
+                    break;
                 default:
                     System.out.println("Opção não válida");
                     break;

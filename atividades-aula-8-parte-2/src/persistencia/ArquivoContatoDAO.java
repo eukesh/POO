@@ -6,7 +6,7 @@ import java.util.List;
 import dados.Contato;
 
 public class ArquivoContatoDAO {
-    private final String caminho = "C:\\Users\\User\\Documents\\Code\\POO\\workspace\\atividades-aula-8-parte-2\\src\\contatos.csv";
+    private final String caminho = "C:\\Users\\User\\Documents\\Code\\POO\\workspace\\atividades-aula-9\\src\\contatos.csv";
     private static EditorTexto arquivo = new EditorTexto();
 
     private String toCSV(Contato pessoa) {
