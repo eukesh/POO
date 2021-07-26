@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import dados.Contato;
+import exceptions.ErroNaGravacaoException;
+import exceptions.ErroNaLeituraException;
 
 public class ArquivoContatoDAO {
     private final String caminho = "C:\\Users\\User\\Documents\\Code\\POO\\workspace\\atividades-aula-9\\src\\contatos.csv";
@@ -53,15 +55,15 @@ public class ArquivoContatoDAO {
         return pessoas;
     }
 
-    public List<Contato> lePessoasArquivo() {
+    public List<Contato> lePessoasArquivo() throws ErroNaLeituraException {
         return stringToListaPessoa(arquivo.leTexto(caminho));
     }
 
-    public void salvaPessoasArquivo(List<Contato> pessoas) {
+    public void salvaPessoasArquivo(List<Contato> pessoas) throws ErroNaGravacaoException {
         arquivo.gravaTexto(caminho, listaPessoaToString(pessoas));
     }
 
-    public void salvaPessoaArquivo(Contato pessoa) {
+    public void salvaPessoaArquivo(Contato pessoa) throws ErroNaGravacaoException {
         arquivo.gravaTexto(caminho, toCSV(pessoa));
     }
 

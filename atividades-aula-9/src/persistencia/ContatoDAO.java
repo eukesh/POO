@@ -3,16 +3,36 @@ package persistencia;
 import java.util.*;
 
 import dados.Contato;
+import exceptions.ContatoJaCadastradoException;
+import exceptions.ContatoNaoCadastradoException;
+import exceptions.ErroNaGravacaoException;
+import exceptions.ErroNaLeituraException;
 
 public class ContatoDAO {
     private ArquivoContatoDAO arquivoContatoDAO = new ArquivoContatoDAO();
 
-    public void insert(Contato pessoa) {
-        arquivoContatoDAO.salvaPessoaArquivo(pessoa);
+    public void insert(Contato pessoa) throws ErroNaGravacaoException, ContatoJaCadastradoException, ErroNaLeituraException {
+        List<Contato> contatos = arquivoContatoDAO.lePessoasArquivo();
+        if(!contatos.contains(pessoa)){
+            contatos.add(pessoa);
+            arquivoContatoDAO.salvaPessoasArquivo(contatos);
+        }else{
+            throw new ContatoJaCadastradoException();
+        }
     }
 
-    public void delete(Contato pessoa) {
+    public void delete(Contato pessoa) throws ContatoNaoCadastradoException, ErroNaLeituraException, ErroNaGravacaoException {
 
+        List<Contato> contatos = arquivoContatoDAO.lePessoasArquivo();
+
+        if(contatos.contains(pessoa)){
+            contatos.remove(pessoa);
+            arquivoContatoDAO.salvaPessoasArquivo(contatos);
+        }else{
+            throw new ContatoNaoCadastradoException();
+        }
+
+        /*
         List<Contato> pessoas = new LinkedList<Contato>();
         for(Contato x : arquivoContatoDAO.lePessoasArquivo()){
             if(x.getTelefone() == pessoa.getTelefone()){
@@ -21,13 +41,11 @@ public class ContatoDAO {
                 pessoas.add(x);
             }
         }
-        /*
-        List<Contato> pessoas = arquivoContatoDAO.lePessoasArquivo();
-        pessoas.remove(pessoa);*/
-        arquivoContatoDAO.salvaPessoasArquivo(pessoas);
+
+        arquivoContatoDAO.salvaPessoasArquivo(pessoas);*/
     }
 
-    public Map<Character, List<Contato>> getAll() {
+    public Map<Character, List<Contato>> getAll() throws ErroNaLeituraException {
         Map<Character, List<Contato>> mapContatos = new HashMap<Character, List<Contato>>();
         for(char i = 65; i<91;i++){
             List<Contato> lista = new LinkedList<Contato>();

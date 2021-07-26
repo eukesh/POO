@@ -1,6 +1,10 @@
 package apresentacao;
 
 import dados.Contato;
+import exceptions.ContatoJaCadastradoException;
+import exceptions.ContatoNaoCadastradoException;
+import exceptions.ErroNaGravacaoException;
+import exceptions.ErroNaLeituraException;
 import negocio.ListaTelefonica;
 import java.util.Scanner;
 
@@ -11,21 +15,32 @@ public class Main {
     static Scanner scanText = new Scanner(System.in);
 
     public static void exibirContatos(char letra) {
-        int indice = 0;
-        for (Contato x : contatos.buscarContatos(letra)) {
-            System.out.println(indice + 1 + ": " + x);
-            indice++;
+
+        try {
+            int indice = 0;
+            for (Contato x : contatos.buscarContatos(letra)) {
+                System.out.println(indice + 1 + ": " + x);
+                indice++;
+            }
+        }catch (ErroNaLeituraException e){
+            System.out.println(e.getMessage());
+            System.out.println("Caminho informado: "+e.getCaminho());
         }
     }
 
-    public static void exibirContatos() {
+    public static void exibirContatos() throws ErroNaLeituraException {
 
-        contatos.buscarContatos().forEach((key, value) -> {
-            System.out.println(key + ": ");
-            for (Contato x : value) {
-                System.out.println("\t" + x);
-            }
-        });
+        try{
+            contatos.buscarContatos().forEach((key, value) -> {
+                System.out.println(key + ": ");
+                for (Contato x : value) {
+                    System.out.println("\t" + x);
+                }
+            });
+        }catch (ErroNaLeituraException e){
+            System.out.println(e.getMessage());
+            System.out.println("Caminho informado: "+e.getCaminho());
+        }
     }
 
     public static Contato novoContato() {
@@ -39,29 +54,49 @@ public class Main {
         return newContato;
     }
 
-    public static void adicionarContato() {
-        contatos.adicionarContato(novoContato());
+    public static void adicionarContato() throws ErroNaLeituraException, ContatoJaCadastradoException, ErroNaGravacaoException {
+        try{
+            contatos.adicionarContato(novoContato());
+        }catch (ErroNaLeituraException e){
+            System.out.println(e.getMessage());
+            System.out.println("Caminho informado: "+e.getCaminho());
+        }catch (ErroNaGravacaoException e){
+            System.out.println(e.getMessage());
+            System.out.println("Caminho informado: "+e.getCaminho());
+        }catch (ContatoJaCadastradoException e){
+            System.out.println(e);
+        }
     }
 
     public static void removerContato() {
         System.out.println("Qual a letra que deseja remover o contato: ");
         char letra = scanText.nextLine().charAt(0);
 
-        if (contatos.buscarContatos(letra).size() > 0) {
-            exibirContatos(letra);
+        try{
+            if (contatos.buscarContatos(letra).size() > 0) {
+                exibirContatos(letra);
 
-            System.out.println("Escolha o código do contato a ser removido");
+                System.out.println("Escolha o código do contato a ser removido");
 
-            int key = Integer.parseInt(scanText.nextLine());
+                int key = Integer.parseInt(scanText.nextLine());
 
-            if (key <= contatos.buscarContatos(letra).size()) {
+                if (key <= contatos.buscarContatos(letra).size()) {
 
-                contatos.removerContato(contatos.buscarContatos(letra).get(key - 1));
+                    contatos.removerContato(contatos.buscarContatos(letra).get(key - 1));
+                }
             }
+        }catch (ErroNaLeituraException e){
+            System.out.println(e.getMessage());
+            System.out.println("Caminho informado: "+e.getCaminho());
+        }catch (ErroNaGravacaoException e){
+            System.out.println(e.getMessage());
+            System.out.println("Caminho informado: "+e.getCaminho());
+        }catch (ContatoNaoCadastradoException e){
+            System.out.println(e);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ErroNaLeituraException, ContatoJaCadastradoException, ErroNaGravacaoException {
         int loop = 0;
         while (loop == 0) {
             System.out.println("\n----------------\nO que deseja fazer?\n");

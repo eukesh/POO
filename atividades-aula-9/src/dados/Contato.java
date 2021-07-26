@@ -29,18 +29,8 @@ public class Contato {
     }
 
     public boolean equals(Object o) {
-
-        if (o instanceof Contato) {
-            Contato c = (Contato) o;
-            if (this.telefone == c.getTelefone()) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-
+        Contato c = (Contato) o;
+        return c.getTelefone() == this.telefone;
     }
 
 }
