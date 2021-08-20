@@ -7,6 +7,12 @@ public class Contato {
 
     public Contato() {
     }
+
+    public Contato(String nome,int telefone){
+        this.nome = nome;
+        this.telefone = telefone;
+    }
+
     public Contato(int id,String nome,int telefone){
         this.id = id;
         this.nome = nome;

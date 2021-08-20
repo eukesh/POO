@@ -17,6 +17,7 @@ public class PessoaTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
+
 		return pessoas.size();
 	}
 	

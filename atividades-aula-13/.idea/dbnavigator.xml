@@ -27,13 +27,15 @@
     <loaded-nodes>
       <connection connection-id="733483d3-d397-4cc4-9d44-7e03573a6043">
         <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, function" />
+        <schema name="public" object-types="table, view, function, column" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="733483d3-d397-4cc4-9d44-7e03573a6043">
-      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from contato;]]></console>
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from contato;
+
+insert into contato values ('Adilson',321)]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

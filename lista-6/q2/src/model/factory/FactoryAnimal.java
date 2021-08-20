@@ -2,12 +2,17 @@ package model.factory;
 
 import model.models.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FactoryAnimal {
+    public List<Integer> list = new ArrayList<>();
+    private static FactoryAnimal instance = null;
 
-    private FactoryAnimal instance = null;
+    private FactoryAnimal(){}
 
-    public FactoryAnimal getInstance(){
-        if(this.instance == null)
+    public static FactoryAnimal getInstance(){
+        if(instance == null)
             instance = new FactoryAnimal();
         return instance;
     }
